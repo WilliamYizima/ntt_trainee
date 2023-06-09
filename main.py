@@ -21,7 +21,7 @@ async def create_item(question: Question):
     openai.api_key = ""
     response = openai.Completion.create(
                 model="text-davinci-003",
-                prompt=question.question,
+                prompt=f"De modo simples,como fazer uma {question.question}",
                 temperature=0.15,
                 max_tokens=1000,
                 top_p=1,
