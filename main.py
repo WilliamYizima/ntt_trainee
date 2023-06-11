@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import openai
 from pydantic import BaseModel
-
+from fastapi.middleware.cors import CORSMiddleware
 
 class Question(BaseModel):
     question: str
@@ -14,6 +14,18 @@ def read_root():
 
     return {"Sucess": True}
 
+
+origins = [
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
 
 @app.post("/question/")
 async def create_item(question: Question):
